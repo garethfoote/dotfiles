@@ -1,5 +1,6 @@
 #!/bin/bash
 ## Dotfiles install script: Marc Hibbins (@marchibbins)
+## Modifed by Gareth Foote (@gaffafoote) on 29/11/12
 
 # Symlink dotfiles in home directory, similar to:
 # https://github.com/holman/dotfiles
@@ -11,6 +12,7 @@ for name in *; do
     target="$HOME/.$name"
     overwrite=0
     backup=0
+    skip=0
 
     if [[ "$ignore_files" == *"$name"* ]]; then
         continue
@@ -28,7 +30,8 @@ for name in *; do
         case $option in
             o) overwrite=1;;
             b) backup=1;;
-            s) echo "- File skipped"
+            s) skip=1 
+	           echo "- File skipped"
                continue;;
             *) echo "Command not recognised, file skipped"
                continue;;
@@ -42,6 +45,7 @@ for name in *; do
             mv "$target" "$target".backup
         fi
     fi
+    
     if [ "$skip" != 1 ]; then
         echo "Creating $target"; echo ""
         ln -s "$PWD/$name" "$target"

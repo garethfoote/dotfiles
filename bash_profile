@@ -1,4 +1,4 @@
-## Bash profile: Marc Hibbins (@marchibbins)
+## Bash profile: Gareth Foote (@gaffafoote)
 
 # Let's stick with .bashrc
 # Note: .bash_profile is read at login, .bashrc thereafter

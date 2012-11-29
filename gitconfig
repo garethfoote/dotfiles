@@ -1,8 +1,10 @@
-## Git config: Marc Hibbins (@marchibbins)
+## Git config: Gareth Foote (@gaffafoote)
 
 [user]
-    name = Marc Hibbins
-    email = marchibbins@gmail.com
+    name = garethfoote
+    email = gareth.foote@gmail.com
+[credential]
+	helper = cache --timeout=3600
 [core]
     editor = /usr/bin/vim
     excludesfile = ~/.gitignore
