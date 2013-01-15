@@ -30,9 +30,8 @@ for name in *; do
         case $option in
             o) overwrite=1;;
             b) backup=1;;
-            s) skip=1 
-	           echo "- File skipped"
-               continue;;
+            s) echo "- File skipped"
+               skip=1;;
             *) echo "Command not recognised, file skipped"
                continue;;
         esac
