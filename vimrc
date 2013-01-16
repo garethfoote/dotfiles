@@ -29,7 +29,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible               " be iMproved
-filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -43,6 +42,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
+Bundle 'bitc/vim-bad-whitespace'
+Bundle 'YankRing.vim'
+Bundle 'nvie/vim-flake8'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
@@ -54,6 +56,7 @@ Bundle 'desert-warm-256'
 " => NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeShowHidden=1
 nnoremap <F4> :NERDTreeToggle<CR>
 autocmd vimenter * NERDTree
 
@@ -77,6 +80,7 @@ set history=700
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
+filetype plugin indent on      " enable loading indent file for filetype
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -160,15 +164,35 @@ set foldcolumn=1
 syntax enable 
 
 " Custom file types
+au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
 au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
 
 try
+    " ------------------------------------------------------------------
+    " Solarized Colorscheme Config
+    " ------------------------------------------------------------------
+    let g:solarized_contrast="high"    "default value is normal
+    syntax enable
+    set background=dark
     colorscheme solarized
+    " ------------------------------------------------------------------
+
+    " The following items are available options, but do not need to be
+    " included in your .vimrc as they are currently set to their defaults.
+
+    " let g:solarized_termtrans=0
+    " let g:solarized_degrade=0
+    " let g:solarized_bold=1
+    " let g:solarized_underline=1
+    " let g:solarized_italic=1
+    " let g:solarized_termcolors=16
+    " let g:solarized_visibility="normal"
+    " let g:solarized_diffmode="normal"
+    " let g:solarized_hitrail=0
+    " let g:solarized_menu=1
 catch
 endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
