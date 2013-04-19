@@ -50,3 +50,13 @@ for name in *; do
         ln -s "$PWD/$name" "$target"
     fi
 done
+
+echo "Intall Vundle for vim? [Y/n]"
+read yno
+case $yno in
+    [yY] | [yY][Ee][Ss] ) 
+        git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+        ;;
+    *) echo "Not installed."
+                    ;;
+esac
