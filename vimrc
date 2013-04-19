@@ -49,6 +49,7 @@ Bundle 'majutsushi/tagbar.git'
 Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
+Bundle 'EasyGrep'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
