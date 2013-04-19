@@ -45,12 +45,18 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'YankRing.vim'
 Bundle 'nvie/vim-flake8'
+Bundle 'majutsushi/tagbar.git'
+Bundle 'Lokaltog/powerline'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-fugitive'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ColorSchemeMenuMaker'
 Bundle 'desert-warm-256'
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
@@ -64,6 +70,11 @@ autocmd vimenter * NERDTree
 " => numbers.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F3> :NumbersToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => TagBar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <F8> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -164,6 +175,7 @@ set foldcolumn=1
 syntax enable 
 
 " Custom file types
+au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
 au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
 au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
@@ -403,6 +415,9 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" Save and load folding.
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
