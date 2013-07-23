@@ -7,6 +7,7 @@
 " Sections:
 "    -> Plugins
 "    -> General
+"    -> Folding
 "    -> VIM user interface
 "    -> Colors and Fonts
 "    -> Files and backups
@@ -50,6 +51,7 @@ Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'EasyGrep'
+Bundle 'ack.vim'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
@@ -106,6 +108,21 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Folding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set foldmethod=syntax
+"set foldlevelstart=1
+"set foldnestmax=3
+
+"let javaScript_fold=1         " JavaScript
+"let perl_fold=1               " Perl
+"let php_folding=1             " PHP
+"let r_syntax_folding=1        " R
+"let ruby_fold=1               " Ruby
+"let sh_fold_enabled=1         " sh
+"let vimsyn_folding='af'       " Vim script
+"let xml_syntax_folding=1      " XML
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,6 +194,7 @@ syntax enable
 
 " Custom file types
 au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
+au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
 au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
