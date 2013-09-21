@@ -52,6 +52,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'EasyGrep'
 Bundle 'ack.vim'
+Bundle 'othree/html5.vim'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
