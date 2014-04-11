@@ -39,6 +39,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Bundle 'Lokaltog/vim-easymotion'
+Bundle 'sophacles/vim-processing'
 Bundle 'scrooloose/nerdtree'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
@@ -52,7 +53,10 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'EasyGrep'
 Bundle 'ack.vim'
-Bundle 'othree/html5.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'editorconfig/editorconfig-vim'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
@@ -68,7 +72,7 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeShowHidden=1
 nnoremap <F4> :NERDTreeToggle<CR>
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => numbers.vim
@@ -93,8 +97,7 @@ endif
 set history=700
 
 " Enable filetype plugins
-filetype plugin on
-filetype indent on
+filetype off
 filetype plugin indent on      " enable loading indent file for filetype
 
 " Set to auto read when a file is changed from the outside
@@ -198,6 +201,8 @@ au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
 au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
 au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
+au BufWinEnter,BufRead,BufNewFile *.markdown set filetype=html
+au BufWinEnter,BufRead,BufNewFile *.md set filetype=html
 au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
 
 try
@@ -306,13 +311,14 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+map <leader>ba :1,1000 bd!<r>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext 
 
@@ -338,6 +344,8 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
+" Show list of buffers by file name and wait for number to switch
+:nnoremap <F6> :buffers<CR>:buffer<Space>
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -369,13 +377,13 @@ if has("mac") || has("macunix")
 endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" func! DeleteTrailingWS()
+"   exe "normal mz"
+"   %s/\s\+$//ge
+"   exe "normal `z"
+" endfunc
+" autocmd BufWrite *.py :call DeleteTrailingWS()
+" autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -498,3 +506,7 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+
+
+set secure
