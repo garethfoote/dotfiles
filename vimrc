@@ -57,6 +57,7 @@ Bundle 'mattn/emmet-vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'othree/html5.vim'
 
 " a bunch of colorschemes + a gui menu listing them
 Bundle 'flazz/vim-colorschemes'
@@ -198,12 +199,12 @@ syntax enable
 
 " Custom file types
 au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
-au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
-au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
-au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
-au BufWinEnter,BufRead,BufNewFile *.markdown set filetype=html
-au BufWinEnter,BufRead,BufNewFile *.md set filetype=html
-au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
+" au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.markdown set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.md set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
 
 try
     " ------------------------------------------------------------------
@@ -245,6 +246,10 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" Color the 80th column,
+if exists('+colorcolumn')
+    set colorcolumn=80 
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -311,7 +316,7 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<r>
+map <leader>ba :1,1000 bd!<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
