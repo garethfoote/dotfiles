@@ -29,51 +29,34 @@
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible               " be iMproved
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-" Bundle 'Lokaltog/vim-easymotion'
-Bundle 'sophacles/vim-processing'
-Bundle 'scrooloose/nerdtree'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'juvenn/mustache.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'bitc/vim-bad-whitespace'
-Bundle 'YankRing.vim'
-Bundle 'nvie/vim-flake8'
-Bundle 'majutsushi/tagbar.git'
-Bundle 'Lokaltog/powerline'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'EasyGrep'
-Bundle 'ack.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'othree/html5.vim'
+Plugin 'ack.vim'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'kien/ctrlp.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-fugitive'
 
-" a bunch of colorschemes + a gui menu listing them
-Bundle 'flazz/vim-colorschemes'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'ColorSchemeMenuMaker'
-Bundle 'desert-warm-256'
+Plugin 'juvenn/mustache.vim'
+Plugin 'othree/html5.vim'
+Plugin 'evidens/vim-twig'
+Plugin 'wavded/vim-stylus'
+Plugin 'kchmck/vim-coffee-script'
+" Plugin 'nvie/vim-flake8'
+" Plugin 'sophacles/vim-processing'
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+Plugin 'altercation/vim-colors-solarized'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeShowHidden=1
-nnoremap <F4> :NERDTreeToggle<CR>
-" autocmd vimenter * NERDTree
+call vundle#end()            " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => numbers.vim
@@ -81,24 +64,19 @@ nnoremap <F4> :NERDTreeToggle<CR>
 nnoremap <F3> :NumbersToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => TagBar
+" => CtrlP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F8> :TagbarToggle<CR>
+let g:ctrlp_root_markers = ['.ctrlp']
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 " Sets how many lines of history VIM has to remember
 set history=700
 
 " Enable filetype plugins
-filetype off
 filetype plugin indent on      " enable loading indent file for filetype
 
 " Set to auto read when a file is changed from the outside
@@ -135,6 +113,7 @@ nmap <leader>w :w!<cr>
 set so=7
 
 " Turn on the WiLd menu
+set wildmode=longest:full
 set wildmenu
 
 " Ignore compiled files
@@ -194,17 +173,6 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable 
-
-" Custom file types
-au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
-" au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
-" au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
-" au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
-" au BufWinEnter,BufRead,BufNewFile *.markdown set filetype=html
-" au BufWinEnter,BufRead,BufNewFile *.md set filetype=html
-" au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
 
 try
     " ------------------------------------------------------------------
@@ -231,14 +199,6 @@ try
     " let g:solarized_menu=1
 catch
 endtry
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -322,8 +282,6 @@ map <leader>ba :1,1000 bd!<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprevious<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext 
 
@@ -380,61 +338,6 @@ if has("mac") || has("macunix")
   vmap <D-j> <M-j>
   vmap <D-k> <M-k>
 endif
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-" func! DeleteTrailingWS()
-"   exe "normal mz"
-"   %s/\s\+$//ge
-"   exe "normal `z"
-" endfunc
-" autocmd BufWrite *.py :call DeleteTrailingWS()
-" autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vimgrep searching and cope displaying
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-
-" Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with vimgrep, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -512,6 +415,11 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-
-
-set secure
+" Custom file types
+" au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
+" au BufWinEnter,BufRead,BufNewFile *.spv set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.html.twig set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.eco set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.markdown set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *.md set filetype=html
+" au BufWinEnter,BufRead,BufNewFile *html.hb set filetype=mustache
