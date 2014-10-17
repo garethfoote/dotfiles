@@ -32,3 +32,7 @@
     df = diff
     br = branch
     lg = log
+[diff]
+	external = /home/gareth/.dotfiles/misc/melddiff.py
+[push]
+	default = simple

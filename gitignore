@@ -2,6 +2,8 @@
 
 # Vim
 .*.sw[a-z]
+.ctrlp
+.editorconfig
 
 # Python
 *.pyc
@@ -26,3 +28,4 @@ node_modules
 .Trashes
 Thumbs.db
 *~
+
