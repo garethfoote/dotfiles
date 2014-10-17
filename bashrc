@@ -11,7 +11,9 @@ alias cd..='cd ..'
 alias ga='git add'
 alias gp='git push'
 alias gl='git log'
+alias gsl='git shortlog'
 alias gs='git status'
+alias gss='git status --short'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gm='git commit -m'
@@ -42,10 +44,34 @@ elif [[ $platform == 'Darwin' ]]; then
     alias ls='ls -G'
     export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
-alias l='ls -CF'
-alias la='ls -AF'
-alias ll='ls -AlF'
+alias l='ls -CF --color'
+alias la='ls -AF --color'
+alias ll='ls -AlF --color'
+alias ls='ls -F --color'
+
+alias watch='watch '
+alias ack='ack-grep'
+
+#tmux
+alias tmux='tmux -2'
 
 # virtualenvwrapper setup
 export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 source /usr/local/bin/virtualenvwrapper.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# ls dir colors
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+source ~/config/tmuxinator.bash
+
+# Show git branch on command line prompt.
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+PS1="\$(parse_git_branch)${debian_chroot:+($debian_chroot)}\w$ "
