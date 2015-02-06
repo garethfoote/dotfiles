@@ -6,10 +6,10 @@
 "
 " Sections:
 "    -> Plugins
+"    -> Individual plugin configs
 "    -> General
 "    -> Folding
 "    -> VIM user interface
-"    -> Colors and Fonts
 "    -> Files and backups
 "    -> Text, tab and indent related
 "    -> Visual mode related
@@ -41,16 +41,18 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'ack.vim'
 Plugin 'myusuf3/numbers.vim'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'mattn/emmet-vim'
 Plugin 'juvenn/mustache.vim'
 Plugin 'othree/html5.vim'
 Plugin 'evidens/vim-twig'
 Plugin 'wavded/vim-stylus'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
 " Plugin 'nvie/vim-flake8'
 " Plugin 'sophacles/vim-processing'
 
@@ -67,7 +69,36 @@ nnoremap <F3> :NumbersToggle<CR>
 " => CtrlP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_root_markers = ['.ctrlp']
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+    " ------------------------------------------------------------------
+    " Solarized Colorscheme Config
+    " ------------------------------------------------------------------
+    let g:solarized_contrast="normal"    "default value is normal
+    syntax enable
+    set background=dark
+    colorscheme solarized
+    " ------------------------------------------------------------------
+
+    " The following items are available options, but do not need to be
+    " included in your .vimrc as they are currently set to their defaults.
+
+    " let g:solarized_termtrans=0
+    " let g:solarized_degrade=0
+    " let g:solarized_bold=1
+    " let g:solarized_underline=1
+    " let g:solarized_italic=1
+    " let g:solarized_termcolors=16
+    " let g:solarized_visibility="normal"
+    " let g:solarized_diffmode="normal"
+    " let g:solarized_hitrail=0
+    " let g:solarized_menu=1
+catch
+endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -90,6 +121,17 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Color the 80th column,
+if exists('+colorcolumn')
+    set colorcolumn=80 
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folding
@@ -106,6 +148,8 @@ nmap <leader>w :w!<cr>
 "let sh_fold_enabled=1         " sh
 "let vimsyn_folding='af'       " Vim script
 "let xml_syntax_folding=1      " XML
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,47 +215,6 @@ set foldcolumn=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-try
-    " ------------------------------------------------------------------
-    " Solarized Colorscheme Config
-    " ------------------------------------------------------------------
-    let g:solarized_contrast="high"    "default value is normal
-    syntax enable
-    set background=dark
-    colorscheme solarized
-    " ------------------------------------------------------------------
-
-    " The following items are available options, but do not need to be
-    " included in your .vimrc as they are currently set to their defaults.
-
-    " let g:solarized_termtrans=0
-    " let g:solarized_degrade=0
-    " let g:solarized_bold=1
-    " let g:solarized_underline=1
-    " let g:solarized_italic=1
-    " let g:solarized_termcolors=16
-    " let g:solarized_visibility="normal"
-    " let g:solarized_diffmode="normal"
-    " let g:solarized_hitrail=0
-    " let g:solarized_menu=1
-catch
-endtry
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-" Color the 80th column,
-if exists('+colorcolumn')
-    set colorcolumn=80 
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
@@ -272,18 +275,20 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Close the current buffer
+" Useful buffer mappings
 map <leader>bd :Bclose<cr>
+map <leader>bn :bnext<cr>
+map <leader>bp :bprev<cr>
+nmap <Leader>bh :call DeleteHiddenBuffers()<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+" map <leader>ba :1,1000 bd!<cr> " Has started to fail. 'Invalid range'
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprev<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -294,7 +299,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  set switchbuf=useopen,usetab,newtab
+  set switchbuf=useopen
   set stal=2
 catch
 endtry
@@ -414,6 +419,28 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+
+noremap <silent> <Leader>W :call ToggleWrap()<CR>
+function ToggleWrap()
+    set virtualedit=
+    setlocal display+=lastline
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    map j gj
+    map k gk
+  endif
+endfunction
+
 
 " Custom file types
 " au BufWinEnter,BufRead,BufNewFile *.less set filetype=css
