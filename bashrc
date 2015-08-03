@@ -38,16 +38,19 @@ export PATH="$PATH:/opt/vagrant/bin"
 # alias ssh-webfaction="ssh foote@foote.webfactional.com"
 
 # ls
-if [[ $platform == 'Linux' ]]; then
+if [[ $os == 'Linux' ]]; then
     alias ls='ls --color=auto'
-elif [[ $platform == 'Darwin' ]]; then
+    alias l='ls -CF --color'
+    alias la='ls -AF --color'
+    alias ll='ls -AlF --color'
+    alias ls='ls -F --color'
+elif [[ $os == 'Darwin' ]]; then
     alias ls='ls -G'
-    export LSCOLORS=GxFxCxDxBxegedabagaced
+    alias l='ls -CFG'
+    alias la='ls -AFG'
+    alias ll='ls -AlFG'
+    alias ls='ls -FG'
 fi
-alias l='ls -CF --color'
-alias la='ls -AF --color'
-alias ll='ls -AlF --color'
-alias ls='ls -F --color'
 
 alias watch='watch '
 alias ack='ack-grep'
