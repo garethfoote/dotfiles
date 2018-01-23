@@ -37,9 +37,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ack.vim'
+Plugin 'fakeclip'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
@@ -289,6 +290,8 @@ map <leader>tn :tabnext<cr>
 map <leader>tp :tabprev<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
+map <leader>tt :tabe %:h<cr>
+
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -359,6 +362,13 @@ map <leader>pp :setlocal paste!<cr>
 " Save and load folding.
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
+
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin"
+    " Do Mac stuff here
+  endif
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
