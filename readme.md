@@ -23,3 +23,5 @@ Install what you want:
 ```
 ./install.sh
 ```
+
+Added emacs. 
