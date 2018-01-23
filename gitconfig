@@ -33,6 +33,12 @@
     br = branch
     lg = log
 [diff]
-	external = /home/gareth/.dotfiles/misc/melddiff.py
+  #tool = /Users/gfoote/.dotfiles/misc/melddiff.py
+  tool = kompare
 [push]
 	default = simple
+[merge]
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
