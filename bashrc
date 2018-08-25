@@ -28,14 +28,7 @@ alias gcl='git clone'
 alias git-ci-affected='git show --pretty="format:" --name-only'
 
 export EDITOR=vim
-export TERM=xterm-256color
-export SVN_EDITOR=vim
-export PATH="$PATH:/opt/vagrant/bin"
-
-
 # SSH - See ~/.ssh/config
-# alias ssh-lenny="ssh webdev@192.168.56.51"
-# alias ssh-webfaction="ssh foote@foote.webfactional.com"
 
 # ls
 if [[ $os == 'Linux' ]]; then
@@ -55,26 +48,22 @@ fi
 alias watch='watch '
 alias ack='ack-grep'
 
-#tmux
-alias tmux='tmux -2'
-
 # virtualenvwrapper setup
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 source /usr/local/bin/virtualenvwrapper.sh
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# Node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# ls dir colors
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
+# Google Cloud SDK
+if [ -f '/Users/gfoote/local/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gfoote/local/google-cloud-sdk/path.zsh.inc'; fi
 
-source ~/config/tmuxinator.bash
+# Shell command completion for gcloud
+if [ -f '/Users/gfoote/local/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gfoote/local/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Show git branch on command line prompt.
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-PS1="\$(parse_git_branch)${debian_chroot:+($debian_chroot)}\w$ "
+# Python
+export PATH="${PATH}:/Users/gfoote/Library/Python/2.7/bin"
+
+source ~/.env
