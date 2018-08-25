@@ -55,8 +55,31 @@ echo "Intall Vundle for vim? [Y/n]"
 read yno
 case $yno in
     [yY] | [yY][Ee][Ss] ) 
-        git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
         ;;
     *) echo "Not installed."
                     ;;
 esac
+
+# OS Specific install. To do: Linux
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+  echo "Install Brew, Iterm2, ZSH and OhMyZSH for macOS? [Y/n]"
+  read yno
+  case $yno in
+      [yY] | [yY][Ee][Ss] ) 
+          /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+          # https://sourabhbajaj.com/mac-setup/iTerm/zsh.html
+          # https://gist.github.com/kevin-smets/8568070
+          brew cask install iterm2
+          brew install zsh
+          sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+          # The installation script should set zsh to your default shell
+          chsh -s $(which zsh)
+          ;;
+      *) echo "Not installed."
+                      ;;
+  esac
+elif [[ "$unamestr" == 'Linux' ]]; then
+  echo "linux"
+fi
