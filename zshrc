@@ -111,3 +111,6 @@ if [ -f '/Users/gfoote/local/google-cloud-sdk/completion.zsh.inc' ]; then source
 export PATH="${PATH}:/Users/gfoote/Library/Python/2.7/bin"
 
 source ~/.env
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
