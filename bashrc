@@ -67,3 +67,6 @@ if [ -f '/Users/gfoote/local/google-cloud-sdk/completion.zsh.inc' ]; then source
 export PATH="${PATH}:/Users/gfoote/Library/Python/2.7/bin"
 
 source ~/.env
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
